@@ -1,0 +1,1774 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>RICH OPPs by SNOW | David Weaver Presents</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css" rel="stylesheet">
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Unbounded:wght@200;300;400;500;600;700;800;900&display=swap');
+        @import url('https://fonts.googleapis.com/css2?family=Outfit:wght@100;200;300;400;500;600;700;800;900&display=swap');
+        
+        :root {
+            --neon-pink: #ff00ff;
+            --neon-blue: #00ffff;
+            --neon-gold: #ffdf00;
+            --dark-blue: #0B0B1A;
+            --rich-purple: #300748;
+            --text-light: #ffffff;
+            --text-gold: #ffdf00;
+            --text-shadow: 0 0 5px rgba(255, 0, 255, 0.7);
+            --gradient-dark: linear-gradient(135deg, #0B0B1A 0%, #1c0f35 50%, #300748 100%);
+            --gradient-light: linear-gradient(135deg, #30033a 0%, #9500ff 50%, #ff00ff 100%);
+            --gradient-gold: linear-gradient(to right, #BF953F, #FCF6BA, #B38728, #FBF5B7, #AA771C);
+            --boxShadow-neon: 0 0 10px rgba(255, 0, 255, 0.5), 0 0 20px rgba(255, 0, 255, 0.3), 0 0 30px rgba(255, 0, 255, 0.1);
+            --boxShadow-gold: 0 0 10px rgba(255, 223, 0, 0.5), 0 0 20px rgba(255, 223, 0, 0.3), 0 0 30px rgba(255, 223, 0, 0.1);
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Outfit', sans-serif;
+            background-color: var(--dark-blue);
+            color: var(--text-light);
+            overflow-x: hidden;
+            position: relative;
+            line-height: 1.6;
+        }
+        
+        body::before {
+            content: '';
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: radial-gradient(circle at 50% 50%, transparent 0%, rgba(11, 11, 26, 0.95) 100%);
+            pointer-events: none;
+            z-index: -1;
+        }
+        
+        /* Custom Scrollbar */
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+        
+        ::-webkit-scrollbar-track {
+            background: var(--dark-blue);
+        }
+        
+        ::-webkit-scrollbar-thumb {
+            background: linear-gradient(var(--neon-pink), var(--neon-blue));
+            border-radius: 4px;
+        }
+        
+        .container {
+            width: 100%;
+            min-height: 100vh;
+            overflow-x: hidden;
+        }
+        
+        .section {
+            position: relative;
+            padding: 80px 20px;
+        }
+        
+        .section-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            position: relative;
+            z-index: 2;
+        }
+        
+        /* Preloader */
+        .preloader {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: var(--dark-blue);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            z-index: 9999;
+        }
+        
+        .loader-logo {
+            font-family: 'Unbounded', sans-serif;
+            font-size: 4rem;
+            font-weight: 800;
+            background: var(--gradient-gold);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            position: relative;
+            animation: pulse 1.5s infinite alternate;
+        }
+        
+        .loader-logo::after {
+            content: '';
+            position: absolute;
+            bottom: -10px;
+            left: 0;
+            width: 0%;
+            height: 4px;
+            background: var(--gradient-gold);
+            animation: line-grow 2s forwards ease-in-out;
+        }
+        
+        @keyframes line-grow {
+            0% {
+                width: 0%;
+            }
+            100% {
+                width: 100%;
+            }
+        }
+        
+        /* Decorative Elements */
+        .grain-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-image: url('data:image/svg+xml;utf8,<svg viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg"><filter id="noise"><feTurbulence type="fractalNoise" baseFrequency="0.65" numOctaves="3" stitchTiles="stitch"/><feColorMatrix type="matrix" values="1 0 0 0 0 0 1 0 0 0 0 0 1 0 0 0 0 0 0.1 0"/></filter><rect width="100%" height="100%" filter="url(%23noise)"/></svg>');
+            opacity: 0.035;
+            pointer-events: none;
+            z-index: 1000;
+        }
+        
+        .particles {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            overflow: hidden;
+            z-index: -1;
+        }
+        
+        .particle {
+            position: absolute;
+            display: block;
+            pointer-events: none;
+            filter: blur(3px);
+            border-radius: 50%;
+            background-color: rgba(255, 255, 255, 0.1);
+        }
+        
+        /* Hero Section */
+        .hero {
+            height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: var(--dark-blue);
+            position: relative;
+            overflow: hidden;
+            padding: 0;
+        }
+        
+        .hero-content {
+            text-align: center;
+            position: relative;
+            z-index: 2;
+            width: 100%;
+            padding: 0 20px;
+        }
+        
+        .book-title-container {
+            position: relative;
+            margin-bottom: 40px;
+        }
+        
+        .book-title {
+            font-family: 'Unbounded', sans-serif;
+            font-size: 6vw;
+            font-weight: 800;
+            margin-bottom: 10px;
+            line-height: 1;
+            background: var(--gradient-gold);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            position: relative;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            filter: drop-shadow(0 0 8px rgba(255, 223, 0, 0.3));
+        }
+        
+        .title-glow {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            filter: blur(40px);
+            opacity: 0.4;
+            background: var(--neon-gold);
+            z-index: -1;
+        }
+        
+        .book-subtitle {
+            font-family: 'Outfit', sans-serif;
+            font-size: 1.2rem;
+            font-weight: 400;
+            letter-spacing: 3px;
+            text-transform: uppercase;
+            margin-top: 20px;
+            color: var(--text-light);
+            opacity: 0.9;
+        }
+        
+        .book-author {
+            font-family: 'Unbounded', sans-serif;
+            font-size: 1.5rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            background: linear-gradient(to right, var(--neon-blue), var(--neon-pink));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            margin-bottom: 30px;
+            letter-spacing: 2px;
+        }
+        
+        .presents {
+            font-family: 'Outfit', sans-serif;
+            font-size: 1rem;
+            font-weight: 300;
+            text-transform: uppercase;
+            letter-spacing: 5px;
+            margin-bottom: 15px;
+            color: rgba(255, 255, 255, 0.8);
+        }
+        
+        .crown-icon {
+            display: inline-block;
+            margin-right: 10px;
+            color: var(--neon-gold);
+            font-size: 1.2rem;
+        }
+        
+        .hero-image-container {
+            position: relative;
+            margin: 40px auto;
+            max-width: 280px;
+            perspective: 1000px;
+        }
+        
+        .hero-book-cover {
+            width: 100%;
+            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.8);
+            border-radius: 5px;
+            transform-style: preserve-3d;
+            transform: rotateY(0deg);
+            transition: transform 0.8s ease;
+        }
+        
+        .hero-book-cover:hover {
+            transform: rotateY(15deg);
+        }
+        
+        .hero-book-shadow {
+            position: absolute;
+            top: 5%;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            border-radius: 5px;
+            background: linear-gradient(45deg, rgba(255, 0, 255, 0.5), rgba(0, 255, 255, 0.5));
+            filter: blur(20px);
+            opacity: 0.4;
+            z-index: -1;
+            transform: translateZ(-10px) scale(0.8);
+        }
+        
+        .cta-container {
+            margin-top: 40px;
+            position: relative;
+        }
+        
+        .cta-button {
+            position: relative;
+            display: inline-block;
+            padding: 18px 50px;
+            background: transparent;
+            color: var(--text-light);
+            font-family: 'Unbounded', sans-serif;
+            font-size: 1rem;
+            font-weight: 600;
+            text-decoration: none;
+            text-transform: uppercase;
+            letter-spacing: 3px;
+            overflow: hidden;
+            transition: all 0.3s ease;
+            z-index: 1;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            border-radius: 4px;
+            cursor: pointer;
+        }
+        
+        .cta-button::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(45deg, var(--neon-pink), var(--neon-blue));
+            z-index: -1;
+            transform: scaleX(0);
+            transform-origin: 0 50%;
+            transition: transform 0.5s ease;
+        }
+        
+        .cta-button:hover::before {
+            transform: scaleX(1);
+        }
+        
+        .cta-button:hover {
+            border-color: transparent;
+            box-shadow: var(--boxShadow-neon);
+        }
+        
+        .release-date {
+            margin-top: 25px;
+            font-size: 1rem;
+            font-weight: 400;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            color: rgba(255, 255, 255, 0.7);
+        }
+        
+        .countdown {
+            font-family: 'Unbounded', sans-serif;
+            font-size: 1.2rem;
+            font-weight: 700;
+            margin-top: 10px;
+            color: var(--text-light);
+        }
+        
+        .scroll-indicator {
+            position: absolute;
+            bottom: 40px;
+            left: 50%;
+            transform: translateX(-50%);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            cursor: pointer;
+            z-index: 3;
+            color: rgba(255, 255, 255, 0.7);
+            font-size: 0.8rem;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+        }
+        
+        .scroll-text {
+            margin-bottom: 10px;
+        }
+        
+        .scroll-icon {
+            font-size: 1.5rem;
+            animation: bounce 2s infinite;
+        }
+        
+        @keyframes bounce {
+            0%, 20%, 50%, 80%, 100% {
+                transform: translateY(0);
+            }
+            40% {
+                transform: translateY(-10px);
+            }
+            60% {
+                transform: translateY(-5px);
+            }
+        }
+        
+        /* 3D City Background */
+        .city-background {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            height: 30%;
+            background: linear-gradient(to top, rgba(0, 0, 0, 0.7), transparent);
+            overflow: hidden;
+            perspective: 800px;
+            transform-style: preserve-3d;
+            z-index: 1;
+        }
+        
+        .city-skyline {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 200%;
+            height: 100%;
+            background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 200"><path fill="%230B0B1A" d="M0,150 L0,200 L1000,200 L1000,150 Q950,120 900,150 Q850,180 800,150 Q750,120 700,150 Q650,180 600,150 Q550,120 500,150 Q450,180 400,150 Q350,120 300,150 Q250,180 200,150 Q150,120 100,150 Q50,180 0,150 Z"/><rect x="10" y="80" width="10" height="70" fill="%23300748"/><rect x="30" y="100" width="15" height="50" fill="%23300748"/><rect x="60" y="70" width="10" height="80" fill="%23300748"/><rect x="80" y="90" width="15" height="60" fill="%23300748"/><rect x="110" y="60" width="8" height="90" fill="%23300748"/><rect x="130" y="80" width="12" height="70" fill="%23300748"/><rect x="160" y="50" width="10" height="100" fill="%23300748"/><rect x="180" y="70" width="14" height="80" fill="%23300748"/><rect x="210" y="90" width="10" height="60" fill="%23300748"/><rect x="230" y="60" width="16" height="90" fill="%23300748"/><rect x="260" y="80" width="12" height="70" fill="%23300748"/><rect x="290" y="50" width="8" height="100" fill="%23300748"/><rect x="310" y="70" width="15" height="80" fill="%23300748"/><rect x="340" y="90" width="10" height="60" fill="%23300748"/><rect x="360" y="60" width="12" height="90" fill="%23300748"/><rect x="390" y="80" width="8" height="70" fill="%23300748"/><rect x="410" y="100" width="15" height="50" fill="%23300748"/><rect x="440" y="70" width="10" height="80" fill="%23300748"/><rect x="460" y="90" width="14" height="60" fill="%23300748"/><rect x="490" y="60" width="8" height="90" fill="%23300748"/><rect x="510" y="80" width="12" height="70" fill="%23300748"/><rect x="540" y="50" width="10" height="100" fill="%23300748"/><rect x="560" y="70" width="15" height="80" fill="%23300748"/><rect x="590" y="90" width="10" height="60" fill="%23300748"/><rect x="610" y="60" width="16" height="90" fill="%23300748"/><rect x="640" y="80" width="12" height="70" fill="%23300748"/><rect x="670" y="50" width="8" height="100" fill="%23300748"/><rect x="690" y="70" width="15" height="80" fill="%23300748"/><rect x="720" y="90" width="10" height="60" fill="%23300748"/><rect x="740" y="60" width="12" height="90" fill="%23300748"/><rect x="770" y="80" width="8" height="70" fill="%23300748"/><rect x="790" y="100" width="15" height="50" fill="%23300748"/><rect x="820" y="70" width="10" height="80" fill="%23300748"/><rect x="840" y="90" width="14" height="60" fill="%23300748"/><rect x="870" y="60" width="8" height="90" fill="%23300748"/><rect x="890" y="80" width="12" height="70" fill="%23300748"/><rect x="920" y="50" width="10" height="100" fill="%23300748"/><rect x="940" y="70" width="15" height="80" fill="%23300748"/><rect x="970" y="90" width="10" height="60" fill="%23300748"/><rect x="990" y="60" width="10" height="90" fill="%23300748"/></svg>');
+            background-repeat: repeat-x;
+            background-size: 1000px 200px;
+            animation: cityMove 60s linear infinite;
+            transform-origin: 50% 100%;
+            transform: rotateX(60deg);
+        }
+        
+        .city-lights {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 200%;
+            height: 100%;
+            background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 200"><circle cx="20" cy="85" r="1" fill="%23ff00ff"/><circle cx="45" cy="105" r="1" fill="%2300ffff"/><circle cx="65" cy="75" r="1" fill="%23ff00ff"/><circle cx="90" cy="95" r="1" fill="%2300ffff"/><circle cx="115" cy="65" r="1" fill="%23ff00ff"/><circle cx="135" cy="85" r="1" fill="%2300ffff"/><circle cx="165" cy="55" r="1" fill="%23ff00ff"/><circle cx="190" cy="75" r="1" fill="%2300ffff"/><circle cx="215" cy="95" r="1" fill="%23ff00ff"/><circle cx="240" cy="65" r="1" fill="%2300ffff"/><circle cx="265" cy="85" r="1" fill="%23ff00ff"/><circle cx="295" cy="55" r="1" fill="%2300ffff"/><circle cx="320" cy="75" r="1" fill="%23ff00ff"/><circle cx="345" cy="95" r="1" fill="%2300ffff"/><circle cx="370" cy="65" r="1" fill="%23ff00ff"/><circle cx="395" cy="85" r="1" fill="%2300ffff"/><circle cx="420" cy="105" r="1" fill="%23ff00ff"/><circle cx="445" cy="75" r="1" fill="%2300ffff"/><circle cx="470" cy="95" r="1" fill="%23ff00ff"/><circle cx="495" cy="65" r="1" fill="%2300ffff"/><circle cx="515" cy="85" r="1" fill="%23ff00ff"/><circle cx="545" cy="55" r="1" fill="%2300ffff"/><circle cx="570" cy="75" r="1" fill="%23ff00ff"/><circle cx="595" cy="95" r="1" fill="%2300ffff"/><circle cx="620" cy="65" r="1" fill="%23ff00ff"/><circle cx="645" cy="85" r="1" fill="%2300ffff"/><circle cx="675" cy="55" r="1" fill="%23ff00ff"/><circle cx="700" cy="75" r="1" fill="%2300ffff"/><circle cx="725" cy="95" r="1" fill="%23ff00ff"/><circle cx="750" cy="65" r="1" fill="%2300ffff"/><circle cx="775" cy="85" r="1" fill="%23ff00ff"/><circle cx="800" cy="105" r="1" fill="%2300ffff"/><circle cx="825" cy="75" r="1" fill="%23ff00ff"/><circle cx="850" cy="95" r="1" fill="%2300ffff"/><circle cx="875" cy="65" r="1" fill="%23ff00ff"/><circle cx="895" cy="85" r="1" fill="%2300ffff"/><circle cx="925" cy="55" r="1" fill="%23ff00ff"/><circle cx="950" cy="75" r="1" fill="%2300ffff"/><circle cx="975" cy="95" r="1" fill="%23ff00ff"/><circle cx="995" cy="65" r="1" fill="%2300ffff"/></svg>');
+            background-repeat: repeat-x;
+            background-size: 1000px 200px;
+            animation: cityMove 30s linear infinite;
+            opacity: 0.8;
+            transform-origin: 50% 100%;
+            transform: rotateX(60deg);
+        }
+        
+        @keyframes cityMove {
+            0% {
+                transform: translateX(0) rotateX(60deg);
+            }
+            100% {
+                transform: translateX(-50%) rotateX(60deg);
+            }
+        }
+        
+        /* Intro Section */
+        .intro {
+            background: var(--gradient-dark);
+            position: relative;
+            z-index: 2;
+        }
+        
+        .intro-content {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            text-align: center;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+        
+        .section-heading {
+            font-family: 'Unbounded', sans-serif;
+            font-size: 2.5rem;
+            font-weight: 700;
+            margin-bottom: 30px;
+            position: relative;
+            display: inline-block;
+        }
+        
+        .section-heading::after {
+            content: '';
+            position: absolute;
+            bottom: -15px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 60%;
+            height: 4px;
+            background: linear-gradient(to right, var(--neon-blue), var(--neon-pink));
+            border-radius: 2px;
+        }
+        
+        .intro-text {
+            font-size: 1.2rem;
+            line-height: 1.8;
+            margin-bottom: 30px;
+            color: rgba(255, 255, 255, 0.9);
+        }
+        
+        .tagline {
+            font-family: 'Unbounded', sans-serif;
+            font-size: 1.5rem;
+            font-weight: 600;
+            color: var(--text-gold);
+            margin: 40px 0;
+            letter-spacing: 1px;
+            line-height: 1.5;
+        }
+        
+        .keywords {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 15px;
+            margin: 40px 0;
+        }
+        
+        .keyword {
+            padding: 12px 25px;
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 30px;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            font-size: 0.9rem;
+            font-weight: 500;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+            color: var(--text-light);
+            transition: all 0.3s ease;
+        }
+        
+        .keyword:hover {
+            border-color: var(--neon-pink);
+            box-shadow: 0 0 15px rgba(255, 0, 255, 0.3);
+            transform: translateY(-5px);
+        }
+        
+        /* Chapter Preview Section */
+        .preview {
+            background: var(--dark-blue);
+            position: relative;
+            z-index: 2;
+            padding-bottom: 150px;
+        }
+        
+        .chapter-title {
+            font-family: 'Unbounded', sans-serif;
+            font-size: 2.5rem;
+            font-weight: 700;
+            color: var(--text-light);
+            margin-bottom: 60px;
+            text-align: center;
+            letter-spacing: 2px;
+            position: relative;
+        }
+        
+        .chapter-title::before {
+            content: '01';
+            position: absolute;
+            top: -20px;
+            left: 50%;
+            transform: translateX(-50%);
+            font-size: 1rem;
+            font-weight: 400;
+            color: var(--neon-pink);
+            letter-spacing: 2px;
+        }
+        
+        .chapter-name {
+            font-family: 'Unbounded', sans-serif;
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--neon-gold);
+            margin-bottom: 30px;
+            text-align: center;
+            text-transform: uppercase;
+            letter-spacing: 3px;
+        }
+        
+        .text-container {
+            max-width: 700px;
+            margin: 0 auto;
+            position: relative;
+        }
+        
+        .paragraph-group {
+            position: relative;
+            margin-bottom: 80px;
+        }
+        
+        .paragraph {
+            position: relative;
+            margin-bottom: 30px;
+            padding: 30px;
+            background: rgba(11, 11, 26, 0.8);
+            border-radius: 10px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+            backdrop-filter: blur(10px);
+            transform: translateY(100px);
+            opacity: 0;
+            transition: all 1s cubic-bezier(0.215, 0.61, 0.355, 1);
+            border-left: 3px solid var(--neon-pink);
+        }
+        
+        .paragraph.visible {
+            transform: translateY(0);
+            opacity: 1;
+        }
+        
+        .paragraph::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(45deg, rgba(255, 0, 255, 0.1), rgba(0, 255, 255, 0.05));
+            border-radius: 10px;
+            opacity: 0;
+            transition: opacity 0.5s ease;
+            pointer-events: none;
+            z-index: -1;
+        }
+        
+        .paragraph:hover::before {
+            opacity: 1;
+        }
+        
+        .paragraph-text {
+            font-size: 1.1rem;
+            line-height: 1.8;
+            color: rgba(255, 255, 255, 0.9);
+        }
+        
+        .highlight {
+            position: relative;
+            display: inline;
+            color: var(--text-light);
+            padding: 0 5px;
+            z-index: 1;
+        }
+        
+        .highlight::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            height: 40%;
+            background: linear-gradient(to right, var(--neon-pink), var(--neon-blue));
+            z-index: -1;
+            opacity: 0.3;
+            border-radius: 2px;
+        }
+        
+        .dialogue {
+            color: var(--neon-gold);
+            font-style: italic;
+        }
+        
+        .line-break {
+            display: block;
+            height: 30px;
+        }
+        
+        .emphasis {
+            font-weight: 600;
+            color: var(--text-light);
+        }
+        
+        .to-be-continued {
+            font-family: 'Unbounded', sans-serif;
+            text-align: center;
+            font-size: 1.2rem;
+            font-weight: 600;
+            letter-spacing: 2px;
+            margin-top: 50px;
+            color: var(--neon-pink);
+            text-transform: uppercase;
+            opacity: 0;
+            transform: translateY(50px);
+            transition: all 0.8s ease;
+        }
+        
+        .to-be-continued.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+        
+        .read-more {
+            display: inline-block;
+            margin-top: 20px;
+            padding: 15px 40px;
+            background: transparent;
+            color: var(--text-light);
+            font-family: 'Unbounded', sans-serif;
+            font-size: 0.9rem;
+            font-weight: 600;
+            text-decoration: none;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            border-radius: 4px;
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+            z-index: 1;
+        }
+        
+        .read-more::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(45deg, var(--neon-pink), var(--neon-blue));
+            z-index: -1;
+            transform: scaleX(0);
+            transform-origin: 0 50%;
+            transition: transform 0.5s ease;
+        }
+        
+        .read-more:hover::before {
+            transform: scaleX(1);
+        }
+        
+        .read-more:hover {
+            border-color: transparent;
+            box-shadow: var(--boxShadow-neon);
+        }
+        
+        /* Waitlist Section */
+        .waitlist {
+            position: relative;
+            background: var(--gradient-dark);
+            padding: 120px 20px;
+            margin-top: -80px;
+            clip-path: polygon(0 80px, 100% 0, 100% 100%, 0 100%);
+            z-index: 3;
+        }
+        
+        .waitlist-content {
+            max-width: 800px;
+            margin: 0 auto;
+            text-align: center;
+        }
+        
+        .waitlist-title {
+            font-family: 'Unbounded', sans-serif;
+            font-size: 2.5rem;
+            font-weight: 700;
+            color: var(--text-gold);
+            margin-bottom: 20px;
+            letter-spacing: 2px;
+            text-shadow: 0 0 10px rgba(255, 223, 0, 0.3);
+        }
+        
+        .waitlist-subtitle {
+            font-size: 1.2rem;
+            color: var(--text-light);
+            margin-bottom: 50px;
+            letter-spacing: 1px;
+            line-height: 1.6;
+        }
+        
+        .waitlist-box {
+            padding: 60px 40px;
+            background: rgba(255, 255, 255, 0.03);
+            backdrop-filter: blur(10px);
+            border-radius: 20px;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            box-shadow: 0 20px 50px rgba(0, 0, 0, 0.3);
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .waitlist-box::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(45deg, rgba(255, 0, 255, 0.05), rgba(0, 255, 255, 0.05));
+            z-index: -1;
+        }
+        
+        .form-group {
+            margin-bottom: 30px;
+            position: relative;
+        }
+        
+        .form-control {
+            width: 100%;
+            padding: 20px 25px;
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 8px;
+            font-family: 'Outfit', sans-serif;
+            font-size: 1rem;
+            color: var(--text-light);
+            transition: all 0.3s ease;
+        }
+        
+        .form-control::placeholder {
+            color: rgba(255, 255, 255, 0.5);
+        }
+        
+        .form-control:focus {
+            outline: none;
+            border-color: var(--neon-pink);
+            box-shadow: 0 0 15px rgba(255, 0, 255, 0.2);
+        }
+        
+        .form-label {
+            position: absolute;
+            top: -10px;
+            left: 15px;
+            padding: 0 10px;
+            background: var(--rich-purple);
+            font-size: 0.8rem;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+            color: rgba(255, 255, 255, 0.7);
+        }
+        
+        .submit-btn {
+            width: 100%;
+            padding: 20px;
+            background: transparent;
+            border: 1px solid var(--neon-gold);
+            border-radius: 8px;
+            font-family: 'Unbounded', sans-serif;
+            font-size: 1rem;
+            font-weight: 600;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            color: var(--text-gold);
+            cursor: pointer;
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+            z-index: 1;
+        }
+        
+        .submit-btn::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: var(--gradient-gold);
+            z-index: -1;
+            transform: scaleX(0);
+            transform-origin: 0 50%;
+            transition: transform 0.5s ease;
+        }
+        
+        .submit-btn:hover::before {
+            transform: scaleX(1);
+        }
+        
+        .submit-btn:hover {
+            color: var(--dark-blue);
+            box-shadow: var(--boxShadow-gold);
+        }
+        
+        .terms {
+            margin-top: 20px;
+            font-size: 0.9rem;
+            color: rgba(255, 255, 255, 0.6);
+        }
+        
+        .exclusive-tag {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            padding: 8px 15px;
+            background: linear-gradient(45deg, var(--neon-pink), var(--neon-blue));
+            border-radius: 30px;
+            font-size: 0.8rem;
+            font-weight: 600;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+            color: var(--text-light);
+            box-shadow: 0 5px 15px rgba(255, 0, 255, 0.3);
+        }
+        
+        /* Features Section */
+        .features {
+            position: relative;
+            background: var(--dark-blue);
+            padding: 120px 20px;
+            z-index: 2;
+        }
+        
+        .features-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            text-align: center;
+        }
+        
+        .features-title {
+            font-family: 'Unbounded', sans-serif;
+            font-size: 2.5rem;
+            font-weight: 700;
+            color: var(--text-light);
+            margin-bottom: 60px;
+            letter-spacing: 2px;
+            position: relative;
+        }
+        
+        .features-title::after {
+            content: '';
+            position: absolute;
+            bottom: -20px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 80px;
+            height: 4px;
+            background: linear-gradient(to right, var(--neon-blue), var(--neon-pink));
+            border-radius: 2px;
+        }
+        
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 40px;
+            margin-top: 60px;
+        }
+        
+        .feature-card {
+            padding: 40px 30px;
+            background: rgba(11, 11, 26, 0.8);
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+            backdrop-filter: blur(10px);
+            transition: all 0.3s ease;
+            border: 1px solid rgba(255, 255, 255, 0.05);
+            position: relative;
+            overflow: hidden;
+            text-align: left;
+        }
+        
+        .feature-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 5px;
+            background: linear-gradient(to right, var(--neon-pink), var(--neon-blue));
+            transition: all 0.3s ease;
+        }
+        
+        .feature-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
+            border-color: rgba(255, 255, 255, 0.1);
+        }
+        
+        .feature-icon {
+            font-size: 2rem;
+            margin-bottom: 25px;
+            color: var(--neon-gold);
+        }
+        
+        .feature-title {
+            font-family: 'Unbounded', sans-serif;
+            font-size: 1.3rem;
+            font-weight: 600;
+            margin-bottom: 15px;
+            color: var(--text-light);
+        }
+        
+        .feature-text {
+            font-size: 1rem;
+            line-height: 1.7;
+            color: rgba(255, 255, 255, 0.8);
+        }
+        
+        /* Author Section */
+        .author {
+            position: relative;
+            background: var(--gradient-dark);
+            padding: 120px 20px;
+            z-index: 2;
+        }
+        
+        .author-content {
+            max-width: 1000px;
+            margin: 0 auto;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+        
+        .author-title {
+            font-family: 'Unbounded', sans-serif;
+            font-size: 2.5rem;
+            font-weight: 700;
+            color: var(--text-light);
+            margin-bottom: 60px;
+            letter-spacing: 2px;
+            text-align: center;
+        }
+        
+        .author-box {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            text-align: center;
+            max-width: 800px;
+        }
+        
+        .author-image {
+            width: 200px;
+            height: 200px;
+            border-radius: 50%;
+            margin-bottom: 30px;
+            position: relative;
+        }
+        
+        .author-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            border-radius: 50%;
+            border: 5px solid var(--dark-blue);
+        }
+        
+        .author-image::after {
+            content: '';
+            position: absolute;
+            top: -10px;
+            left: -10px;
+            right: -10px;
+            bottom: -10px;
+            border-radius: 50%;
+            border: 2px solid var(--neon-pink);
+            animation: pulse 3s infinite;
+            z-index: -1;
+        }
+        
+        .author-name {
+            font-family: 'Unbounded', sans-serif;
+            font-size: 2rem;
+            font-weight: 700;
+            color: var(--text-gold);
+            margin-bottom: 15px;
+            letter-spacing: 2px;
+        }
+        
+        .author-subtitle {
+            font-size: 1.1rem;
+            font-weight: 400;
+            color: var(--neon-pink);
+            margin-bottom: 30px;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+        }
+        
+        .author-bio {
+            font-size: 1.1rem;
+            line-height: 1.8;
+            color: rgba(255, 255, 255, 0.9);
+            margin-bottom: 40px;
+        }
+        
+        .social-links {
+            display: flex;
+            gap: 20px;
+            margin-top: 30px;
+        }
+        
+        .social-link {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.05);
+            color: var(--text-light);
+            font-size: 1.2rem;
+            transition: all 0.3s ease;
+        }
+        
+        .social-link:hover {
+            background: linear-gradient(45deg, var(--neon-pink), var(--neon-blue));
+            transform: translateY(-5px);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+        }
+        
+        /* Footer */
+        .footer {
+            position: relative;
+            background: var(--dark-blue);
+            padding: 100px 20px 40px;
+            text-align: center;
+            z-index: 2;
+        }
+        
+        .footer-content {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+        
+        .footer-logo {
+            font-family: 'Unbounded', sans-serif;
+            font-size: 2.5rem;
+            font-weight: 700;
+            color: var(--text-light);
+            margin-bottom: 30px;
+            letter-spacing: 2px;
+        }
+        
+        .footer-text {
+            font-size: 1rem;
+            color: rgba(255, 255, 255, 0.7);
+            margin-bottom: 40px;
+            line-height: 1.7;
+        }
+        
+        .footer-nav {
+            display: flex;
+            justify-content: center;
+            gap: 30px;
+            margin-bottom: 40px;
+        }
+        
+        .footer-link {
+            font-size: 0.9rem;
+            color: rgba(255, 255, 255, 0.7);
+            text-decoration: none;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+            transition: all 0.3s ease;
+        }
+        
+        .footer-link:hover {
+            color: var(--neon-pink);
+        }
+        
+        .copyright {
+            font-size: 0.9rem;
+            color: rgba(255, 255, 255, 0.5);
+            margin-top: 60px;
+        }
+        
+        .footer-divider {
+            width: 80%;
+            margin: 30px auto;
+            height: 1px;
+            background: linear-gradient(to right, transparent, rgba(255, 255, 255, 0.2), transparent);
+        }
+        
+        /* Animations */
+        @keyframes pulse {
+            0% {
+                opacity: 0.6;
+                transform: scale(1);
+            }
+            50% {
+                opacity: 0.9;
+                transform: scale(1.05);
+            }
+            100% {
+                opacity: 0.6;
+                transform: scale(1);
+            }
+        }
+        
+        @keyframes float {
+            0% {
+                transform: translateY(0px);
+            }
+            50% {
+                transform: translateY(-20px);
+            }
+            100% {
+                transform: translateY(0px);
+            }
+        }
+        
+        @keyframes rotate {
+            0% {
+                transform: rotate(0deg);
+            }
+            100% {
+                transform: rotate(360deg);
+            }
+        }
+        
+        /* Loading Animation */
+        .loading-bar {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 5px;
+            background: linear-gradient(to right, var(--neon-pink), var(--neon-blue));
+            z-index: 9999;
+            transform: scaleX(0);
+            transform-origin: 0 0;
+            transition: transform 0.3s ease;
+        }
+        
+        /* Text Splitting Animation */
+        .char {
+            display: inline-block;
+            opacity: 0;
+            transform: translateY(50px);
+            transition: all 0.5s cubic-bezier(0.215, 0.61, 0.355, 1);
+        }
+        
+        .char.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+        
+        /* 3D Tilt Effect */
+        .tilt {
+            transform-style: preserve-3d;
+            transform: perspective(1000px);
+            transition: transform 0.5s ease;
+        }
+        
+        .tilt-inner {
+            transform: translateZ(20px);
+        }
+        
+        /* Media Queries */
+        @media (max-width: 992px) {
+            .book-title {
+                font-size: 8vw;
+            }
+            
+            .features-grid {
+                grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            }
+        }
+        
+        @media (max-width: 768px) {
+            .book-title {
+                font-size: 10vw;
+            }
+            
+            .book-subtitle {
+                font-size: 1rem;
+            }
+            
+            .book-author {
+                font-size: 1.2rem;
+            }
+            
+            .section-heading, .chapter-title, .waitlist-title, .features-title, .author-title {
+                font-size: 2rem;
+            }
+            
+            .tagline {
+                font-size: 1.2rem;
+            }
+            
+            .paragraph {
+                padding: 25px;
+            }
+            
+            .paragraph-text {
+                font-size: 1rem;
+            }
+            
+            .waitlist-box {
+                padding: 40px 25px;
+            }
+        }
+        
+        @media (max-width: 576px) {
+            .hero {
+                height: auto;
+                min-height: 100vh;
+                padding: 100px 0;
+            }
+            
+            .book-title {
+                font-size: 3rem;
+            }
+            
+            .section-heading, .chapter-title, .waitlist-title, .features-title, .author-title {
+                font-size: 1.8rem;
+            }
+            
+            .features-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .cta-button, .read-more, .submit-btn {
+                padding: 15px 30px;
+                font-size: 0.9rem;
+            }
+            
+            .keywords {
+                gap: 10px;
+            }
+            
+            .keyword {
+                padding: 8px 15px;
+                font-size: 0.8rem;
+            }
+            
+            .footer-nav {
+                flex-direction: column;
+                gap: 15px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Preloader -->
+    <div class="preloader">
+        <div class="loader-logo">RICH OPPs</div>
+    </div>
+    
+    <!-- Loading Bar -->
+    <div class="loading-bar"></div>
+    
+    <!-- Grain Overlay -->
+    <div class="grain-overlay"></div>
+    
+    <!-- Particles Background -->
+    <div class="particles"></div>
+    
+    <div class="container">
+        <!-- Hero Section -->
+        <section class="hero">
+            <div class="city-background">
+                <div class="city-skyline"></div>
+                <div class="city-lights"></div>
+            </div>
+            
+            <div class="hero-content">
+                <p class="presents"><span class="crown-icon"><i class="fas fa-crown"></i></span>DAVID WEAVER PRESENTS</p>
+                <div class="book-title-container">
+                    <h1 class="book-title">RICH OPPs</h1>
+                    <div class="title-glow"></div>
+                </div>
+                <h2 class="book-subtitle">A HIGH-STAKES URBAN DRAMA</h2>
+                <h3 class="book-author">BY SNOW</h3>
+                
+                <div class="hero-image-container">
+                    <img src="https://i.imgur.com/4KNOxpf.jpeg" alt="Rich OPPs Book Cover" class="hero-book-cover">
+                    <div class="hero-book-shadow"></div>
+                </div>
+                
+                <div class="cta-container">
+                    <a href="#waitlist" class="cta-button">TAG ME</a>
+                    <p class="release-date">DROPPING THIS FRIDAY</p>
+                    <div class="countdown" id="countdown">2 DAYS LEFT</div>
+                </div>
+            </div>
+            
+            <div class="scroll-indicator" id="scroll-down">
+                <span class="scroll-text">Scroll Down</span>
+                <i class="fas fa-chevron-down scroll-icon"></i>
+            </div>
+        </section>
+        
+        <!-- Intro Section -->
+        <section class="section intro">
+            <div class="section-content intro-content">
+                <h2 class="section-heading">THE STORY</h2>
+                <p class="intro-text">Step into the world of Krymson, where love, loyalty, and ambition collide in the high-stakes urban landscape. When her relationship and career are simultaneously threatened by a powerful woman, Krymson must decide how far she's willing to go to protect what's hers.</p>
+                
+                <h3 class="tagline">"Love. Power. Betrayal. How far would you go to keep what's yours?"</h3>
+                
+                <div class="keywords">
+                    <span class="keyword">Love</span>
+                    <span class="keyword">Power</span>
+                    <span class="keyword">Betrayal</span>
+                    <span class="keyword">Ambition</span>
+                    <span class="keyword">Loyalty</span>
+                    <span class="keyword">Deception</span>
+                </div>
+                
+                <a href="#preview" class="cta-button">Read Preview</a>
+            </div>
+        </section>
+        
+        <!-- Chapter Preview Section -->
+        <section class="section preview" id="preview">
+            <div class="section-content">
+                <h2 class="chapter-title">CHAPTER PREVIEW</h2>
+                <h3 class="chapter-name">Krymson</h3>
+                
+                <div class="text-container">
+                    <div class="paragraph-group">
+                        <div class="paragraph" data-index="1">
+                            <p class="paragraph-text">My heart was racing as I paced back and forth in my bedroom <span class="highlight">complexed with mixed emotions</span>. I felt a sense of anxiety and uneasiness as my intuition suggested something amiss. This feeling of insecurity and self-doubt wasn't me, but after receiving the text from Kara letting me know how our boss was lusting over my man, that shit wasn't sitting well with me. Once she learned that he was my guy, why would she continue to offer him business and now she was going to allow the party after damn near chewing my head off at the office today. What the hell was she trying to do? She had the game fucked up if she thought that I would sit back and allow her to try and take a man that I've built up, away from me.</p>
+                        </div>
+                        
+                        <div class="paragraph" data-index="2">
+                            <p class="paragraph-text">I had the location to where they were and was tempted to drive my ass over there to confront her, but that wouldn't be good business for Brye, and the bitch could fire me. It was time for us to secure our relationship because 5 years of playing house, it was time for him to put a ring on my finger. It was worth it knowing how much I've held him down from day one. My day was already ruined because of the meeting earlier today, and just when I was starting to unwind, now sadness and hurt, <span class="highlight">fearing betrayal and the potential loss of trust</span> in the relationship consumed me. Once he found out who she was, why would he try to do business with her.</p>
+                        </div>
+                    </div>
+                    
+                    <div class="paragraph-group">
+                        <div class="paragraph" data-index="3">
+                            <p class="paragraph-text">Overall, my feelings were turbulent, mixed with confusion, fear, and longing for honesty and transparency. <span class="highlight">Threatened by this woman because of who she was</span>, it could be a possibility that Brye could be persuaded to fall into her trap because she has the means to make him more successful than he already is. My livelihood felt threatened and so did my relationship. I could be over thinking but knowing that he wasn't happy with how I reacted today when his brother showed up, him leaving the house without saying a word, we were in a bad place and Heather was a beautiful woman. I was freaking out because who knows what was going on or being said at this meeting.</p>
+                        </div>
+                        
+                        <div class="paragraph" data-index="4">
+                            <p class="paragraph-text">It never dawned on me that it was a possibility that we would break up, and him move on with another woman after everything we've been through. Now, it was weighing heavily on my mind, and I didn't know what to do. I loved this man with everything I had in me, and losing him wasn't an option, not without a fight. We talked about future plans, and he promised me that once we were married, we would become business partners to build our legacy together. I wasn't ready for kids because I didn't want to share him with anyone or be tied down raising a kid when we were having the time of our lives working on our careers and traveling when we wanted. <span class="highlight">It was time for me to reevaluate my life and lock him in by getting pregnant.</span> One thing I know about Brye, he's family oriented and would be locked in for life if he found out I was pregnant.</p>
+                        </div>
+                    </div>
+                    
+                    <div class="paragraph-group">
+                        <div class="paragraph" data-index="5">
+                            <p class="paragraph-text">Shit, I just had an idea. Picking up my phone that laid on my bed, I dialed my friend, Alana's number.</p>
+                            <span class="line-break"></span>
+                            <p class="paragraph-text"><span class="dialogue">"Hello,"</span> she answered on the first ring.</p>
+                            <span class="line-break"></span>
+                            <p class="paragraph-text"><span class="dialogue">"Hello, darling."</span> I took a seat on the bottom of my bed trying to prepare myself mentally for what I was about to ask her to do for me. <span class="dialogue">"Are you busy?"</span></p>
+                        </div>
+                        
+                        <div class="paragraph" data-index="6">
+                            <p class="paragraph-text"><span class="dialogue">"Never for you love. What's going on?"</span></p>
+                            <span class="line-break"></span>
+                            <p class="paragraph-text"><span class="dialogue">"I need a big favor, but I'm kind of nervous to ask you because it's going to sound weird as hell, but I'm desperate."</span></p>
+                            <span class="line-break"></span>
+                            <p class="paragraph-text"><span class="dialogue">"Are you okay? What's wrong, friend?"</span></p>
+                        </div>
+                    </div>
+                    
+                    <div class="paragraph-group">
+                        <div class="paragraph" data-index="7">
+                            <p class="paragraph-text"><span class="dialogue">"Remember I texted you about what transpired earlier today between my boss and I?"</span></p>
+                            <span class="line-break"></span>
+                            <p class="paragraph-text"><span class="dialogue">"Yes,"</span></p>
+                            <span class="line-break"></span>
+                            <p class="paragraph-text"><span class="dialogue">"Well, Brye had a meeting with someone who's supposed to help his business venture be taken to the next level. My boss is the one he met with tonight and Kara ass was telling me how she was damn near drooling out of her mouth and being flirtatious with him. She knows that we're together and she doesn't care. Anyways, I need to lock him in and feel secure in this relationship but I'm going to need to make him feel the need to put a ring on my finger right away. That's where you come in at."</span></p>
+                        </div>
+                        
+                        <div class="paragraph" data-index="8">
+                            <p class="paragraph-text"><span class="dialogue">"What do you need from me?"</span></p>
+                            <span class="line-break"></span>
+                            <p class="paragraph-text"><span class="dialogue">"Do you still have your pregnancy test?"</span></p>
+                            <span class="line-break"></span>
+                            <p class="paragraph-text"><span class="emphasis">How far will Krymson go to keep what's hers?</span></p>
+                        </div>
+                    </div>
+                    
+                    <div class="to-be-continued">Continue reading when the book drops this Friday...</div>
+                    
+                    <div style="text-align: center; margin-top: 50px;">
+                        <a href="#waitlist" class="read-more">Tag Me for Release</a>
+                    </div>
+                </div>
+            </div>
+        </section>
+        
+        <!-- Waitlist Section -->
+        <section class="section waitlist" id="waitlist">
+            <div class="section-content waitlist-content">
+                <h2 class="waitlist-title">TAG ME</h2>
+                <p class="waitlist-subtitle">Be the first to experience the drama when "Rich OPPs" drops this Friday</p>
+                
+                <div class="waitlist-box">
+                    <span class="exclusive-tag">Exclusive Access</span>
+                    
+                    <form id="waitlist-form">
+                        <div class="form-group">
+                            <label class="form-label">Full Name</label>
+                            <input type="text" class="form-control" placeholder="Enter your full name" required>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label class="form-label">Email Address</label>
+                            <input type="email" class="form-control" placeholder="Enter your email address" required>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label class="form-label">Phone Number (Optional)</label>
+                            <input type="tel" class="form-control" placeholder="Enter your phone number">
+                        </div>
+                        
+                        <button type="submit" class="submit-btn">TAG ME FOR RELEASE</button>
+                    </form>
+                    
+                    <p class="terms">By submitting, you agree to receive updates about this release and future books by SNOW. Your information will never be shared with third parties.</p>
+                </div>
+            </div>
+        </section>
+        
+        <!-- Features Section -->
+        <section class="section features">
+            <div class="section-content features-content">
+                <h2 class="features-title">WHY YOU NEED THIS BOOK</h2>
+                
+                <div class="features-grid">
+                    <div class="feature-card">
+                        <div class="feature-icon"><i class="fas fa-fire"></i></div>
+                        <h3 class="feature-title">Intense Drama</h3>
+                        <p class="feature-text">Experience the raw emotions and high-stakes decisions that come when love, career, and self-worth are all on the line. Krymson's story will keep you on the edge from start to finish.</p>
+                    </div>
+                    
+                    <div class="feature-card">
+                        <div class="feature-icon"><i class="fas fa-heart"></i></div>
+                        <h3 class="feature-title">Real Relationships</h3>
+                        <p class="feature-text">Explore the complexities of modern relationships, where trust is tested and the line between love and possession becomes blurred in the pursuit of security.</p>
+                    </div>
+                    
+                    <div class="feature-card">
+                        <div class="feature-icon"><i class="fas fa-gem"></i></div>
+                        <h3 class="feature-title">Luxurious World</h3>
+                        <p class="feature-text">Step into a world of ambition, power, and luxury, where status means everything and people will do whatever it takes to climb higher and protect what's theirs.</p>
+                    </div>
+                    
+                    <div class="feature-card">
+                        <div class="feature-icon"><i class="fas fa-bolt"></i></div>
+                        <h3 class="feature-title">Gripping Plot</h3>
+                        <p class="feature-text">With unexpected twists and turns, this story takes you on a journey through the mind of a woman determined not to lose everything she's worked for.</p>
+                    </div>
+                    
+                    <div class="feature-card">
+                        <div class="feature-icon"><i class="fas fa-users"></i></div>
+                        <h3 class="feature-title">Complex Characters</h3>
+                        <p class="feature-text">Meet characters with depth, flaws, and relatable motivations that will have you questioning where your loyalties lie with each turning page.</p>
+                    </div>
+                    
+                    <div class="feature-card">
+                        <div class="feature-icon"><i class="fas fa-comment-dots"></i></div>
+                        <h3 class="feature-title">Authentic Voice</h3>
+                        <p class="feature-text">Written with an authentic voice that captures the essence of urban life and the real emotions that drive life-changing decisions.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+        
+        <!-- Author Section -->
+        <section class="section author">
+            <div class="section-content author-content">
+                <h2 class="author-title">ABOUT THE AUTHOR</h2>
+                
+                <div class="author-box">
+                    <div class="author-image">
+                        <img src="https://i.imgur.com/76uthvL.png" alt="Author SNOW">
+                    </div>
+                    
+                    <h3 class="author-name">SNOW</h3>
+                    <p class="author-subtitle">Bestselling Urban Fiction Author</p>
+                    
+                    <p class="author-bio">SNOW is known for creating powerful urban fiction that delves deep into the complexities of modern relationships, ambition, and the high price of success. With multiple bestsellers that have captivated readers nationwide, SNOW continues to deliver stories that resonate with authentic experiences and raw emotion. Each novel explores the delicate balance between love, power, and self-preservation in a world where loyalty is rare and betrayal is common.</p>
+                    
+                </div>
+            </div>
+        </section>
+        
+        <!-- Footer -->
+        <footer class="footer">
+            <div class="footer-content">
+                <h2 class="footer-logo">RICH OPPs</h2>
+                <p class="footer-text">The highly anticipated new urban fiction drama by SNOW, presented by David Weaver. Get exclusive access when you join our waitlist for the official release this Friday.</p>
+                
+                <div class="social-links">
+                    <a href="http://instagram.com/snowbestsellingauthor" class="social-link"><i class="fab fa-instagram"></i></a>
+                    <a href="https://www.facebook.com/author.snow.79" class="social-link"><i class="fab fa-facebook-f"></i></a>
+                    <a href="https://www.tiktok.com/@sonoviaalexander" class="social-link"><i class="fab fa-tiktok"></i></a>
+                </div>
+                
+                <div class="footer-divider"></div>
+
+                
+                <p class="copyright">© 2025 David Weaver Presents | All Rights Reserved</p>
+            </div>
+        </footer>
+    </div>
+    
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <script>
+        // Preloader
+        window.addEventListener('load', function() {
+            // Hide preloader
+            setTimeout(function() {
+                document.querySelector('.preloader').style.opacity = '0';
+                setTimeout(function() {
+                    document.querySelector('.preloader').style.display = 'none';
+                    
+                    // Show loading bar
+                    const loadingBar = document.querySelector('.loading-bar');
+                    loadingBar.style.transform = 'scaleX(1)';
+                    
+                    // Hide loading bar after transition
+                    setTimeout(function() {
+                        loadingBar.style.opacity = '0';
+                    }, 500);
+                }, 500);
+            }, 1500);
+            
+            // Initialize animations
+            initAnimations();
+        });
+        
+        // Smooth scroll functionality
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                
+                document.querySelector(this.getAttribute('href')).scrollIntoView({
+                    behavior: 'smooth'
+                });
+            });
+        });
+        
+        // Parallax effect
+        window.addEventListener('scroll', function() {
+            const scrollPosition = window.pageYOffset;
+            
+            // Parallax for city background
+            const cityBackground = document.querySelector('.city-background');
+            if (cityBackground) {
+                cityBackground.style.transform = `translateY(${scrollPosition * 0.2}px)`;
+            }
+            
+            // Check for elements to animate on scroll
+            checkScrollAnimations();
+        });
+        
+        // Initialize particles
+        function initParticles() {
+            const particlesContainer = document.querySelector('.particles');
+            const numberOfParticles = 50;
+            
+            for (let i = 0; i < numberOfParticles; i++) {
+                const particle = document.createElement('span');
+                particle.classList.add('particle');
+                
+                // Random properties
+                const size = Math.random() * 5 + 1;
+                const posX = Math.random() * 100;
+                const posY = Math.random() * 100;
+                const opacity = Math.random() * 0.5 + 0.1;
+                const animationDuration = Math.random() * 20 + 10;
+                const animationDelay = Math.random() * 10;
+                
+                // Apply styles
+                particle.style.width = `${size}px`;
+                particle.style.height = `${size}px`;
+                particle.style.left = `${posX}%`;
+                particle.style.top = `${posY}%`;
+                particle.style.opacity = opacity;
+                particle.style.animation = `float ${animationDuration}s ${animationDelay}s infinite alternate ease-in-out`;
+                
+                particlesContainer.appendChild(particle);
+            }
+        }
+        
+        // Check for elements to animate on scroll
+        function checkScrollAnimations() {
+            // Reveal paragraphs
+            const paragraphs = document.querySelectorAll('.paragraph');
+            paragraphs.forEach(paragraph => {
+                const rect = paragraph.getBoundingClientRect();
+                const windowHeight = window.innerHeight;
+                
+                if (rect.top < windowHeight * 0.85) {
+                    paragraph.classList.add('visible');
+                }
+            });
+            
+            // Reveal "to be continued" text
+            const tbc = document.querySelector('.to-be-continued');
+            if (tbc) {
+                const tbcRect = tbc.getBoundingClientRect();
+                
+                if (tbcRect.top < window.innerHeight * 0.85) {
+                    tbc.classList.add('visible');
+                }
+            }
+        }
+        
+        // Initialize all animations
+        function initAnimations() {
+            // Initialize particles
+            initParticles();
+            
+            // Check initial animations
+            checkScrollAnimations();
+            
+            // Text splitting for main title
+            const bookTitle = document.querySelector('.book-title');
+            if (bookTitle) {
+                const text = bookTitle.textContent;
+                bookTitle.innerHTML = '';
+                
+                for (let i = 0; i < text.length; i++) {
+                    const char = document.createElement('span');
+                    char.classList.add('char');
+                    char.style.transitionDelay = `${i * 0.05}s`;
+                    char.textContent = text[i];
+                    bookTitle.appendChild(char);
+                    
+                    // Add visible class after a delay
+                    setTimeout(() => {
+                        char.classList.add('visible');
+                    }, 100);
+                }
+            }
+            
+            // 3D tilt effect
+            const tiltElements = document.querySelectorAll('.tilt');
+            tiltElements.forEach(element => {
+                element.addEventListener('mousemove', function(e) {
+                    const rect = this.getBoundingClientRect();
+                    const x = e.clientX - rect.left;
+                    const y = e.clientY - rect.top;
+                    
+                    const xPercent = x / rect.width - 0.5;
+                    const yPercent = y / rect.height - 0.5;
+                    
+                    this.style.transform = `perspective(1000px) rotateY(${xPercent * 10}deg) rotateX(${yPercent * -10}deg)`;
+                });
+                
+                element.addEventListener('mouseleave', function() {
+                    this.style.transform = 'perspective(1000px) rotateY(0) rotateX(0)';
+                });
+            });
+        }
+        
+        // Form submission handler
+        document.getElementById('waitlist-form').addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            // Replace form with success message
+            this.innerHTML = `
+                <div style="text-align: center; padding: 30px 0;">
+                    <div style="font-size: 3rem; color: var(--neon-gold); margin-bottom: 20px;">
+                        <i class="fas fa-check-circle"></i>
+                    </div>
+                    <h3 style="font-family: 'Unbounded', sans-serif; font-size: 1.5rem; color: var(--text-gold); margin-bottom: 15px;">
+                        You're Tagged!
+                    </h3>
+                    <p style="font-size: 1.1rem; color: var(--text-light); margin-bottom: 10px;">
+                        We'll notify you the moment "Rich OPPs" drops this Friday.
+                    </p>
+                    <p style="font-size: 0.9rem; color: rgba(255, 255, 255, 0.7); margin-top: 20px;">
+                        Get ready for Krymson's story...
+                    </p>
+                </div>
+            `;
+        });
+        
+        // Countdown timer
+        function updateCountdown() {
+            const now = new Date();
+            const releaseDate = new Date(now);
+            
+            // Set to this Friday
+            releaseDate.setDate(now.getDate() + (5 - now.getDay()) % 7);
+            releaseDate.setHours(0, 0, 0, 0);
+            
+            // If today is Friday, set to next Friday
+            if (now.getDay() === 5 && now.getHours() >= 0) {
+                releaseDate.setDate(releaseDate.getDate() + 7);
+            }
+            
+            const diff = releaseDate - now;
+            const days = Math.floor(diff / (1000 * 60 * 60 * 24));
+            const hours = Math.floor((diff % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+            
+            let countdownText = '';
+            if (days > 0) {
+                countdownText = `${days} DAY${days > 1 ? 'S' : ''} LEFT`;
+            } else {
+                countdownText = `${hours} HOUR${hours > 1 ? 'S' : ''} LEFT`;
+            }
+            
+            document.getElementById('countdown').textContent = countdownText;
+        }
+        
+        // Initialize countdown
+        updateCountdown();
+        setInterval(updateCountdown, 1000 * 60); // Update every minute
+    </script>
+</body>
+</html>
